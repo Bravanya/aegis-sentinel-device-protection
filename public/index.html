@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aegis Sentinel is an interactive SOC command centre portfolio project with simulated data." />
+  <title>Aegis Sentinel | Security Operations Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <div class="scanline" aria-hidden="true"></div>
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+  <section class="auth-gate" id="authGate" aria-label="Aegis Sentinel account access">
+    <div class="auth-shell">
+      <aside class="auth-aside">
+        <a class="auth-brand" href="#" aria-label="Aegis Sentinel">
+          <span class="auth-shield" aria-hidden="true">
+            <svg viewBox="0 0 34 38" fill="none"><path d="M17 2 4 7.7v9.7c0 9.1 5.9 16 13 18.6 7.1-2.6 13-9.5 13-18.6V7.7L17 2Z" stroke="currentColor" stroke-width="1.6"/><path d="m11.3 19.2 3.7 3.5 7.8-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span><b>AEGIS</b><em>SENTINEL</em></span>
+        </a>
+        <p class="auth-overline"><span></span> SECURITY OPERATIONS PLATFORM</p>
+        <h1>See the signal.<br><strong>Own the response.</strong></h1>
+        <p class="auth-description">A server-backed, multi-user SOC workspace for monitoring simulated detections, investigating cases, running safe response workflows, and learning analyst operations.</p>
+        <div class="auth-feature-list">
+          <div><i>01</i><span><b>Single workspace</b><small>Events, cases, threat intel, assets and playbooks.</small></span></div>
+          <div><i>02</i><span><b>Safe by design</b><small>All alerts and response actions are simulated locally.</small></span></div>
+          <div><i>03</i><span><b>Full training access</b><small>Every registered user can use all simulator features.</small></span></div>
+        </div>
+        <div class="auth-status"><span class="pulse"></span> SERVER WORKSPACE ONLINE <b>•</b> LIVE SOCKET TELEMETRY</div>
+      </aside>
+
+      <div class="auth-card-wrap">
+        <div class="auth-card">
+          <div class="auth-card-head">
+            <p class="auth-kicker" id="authKicker">WELCOME BACK</p>
+            <h2 id="authTitle">Sign in to Aegis Sentinel</h2>
+            <p id="authSubtitle">Use your secure Aegis Sentinel account to continue.</p>
+          </div>
+
+          <div class="auth-notice" id="authNotice" role="status" aria-live="polite"></div>
+
+          <form class="auth-form auth-form-active" id="signInForm" novalidate>
+            <label>Email address<input id="signInEmail" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+            <label>Password<div class="password-field"><input id="signInPassword" type="password" autocomplete="current-password" placeholder="Enter your password" required><button class="password-toggle" type="button" data-password-toggle="signInPassword" aria-label="Show password">◉</button></div></label>
+            <div class="auth-form-row"><label class="checkbox-label"><input id="rememberAccount" type="checkbox" checked><span>Keep me signed in securely on this browser</span></label></div>
+            <button class="auth-submit" type="submit">Sign in to workspace <span>→</span></button>
+            <div class="auth-divider"><span>OR</span></div>
+            <button class="demo-signin" id="demoSignIn" type="button"><span class="demo-dot"></span> Enter with demo account</button>
+            <p class="auth-switch">New to Aegis Sentinel? <button class="link-button" type="button" data-auth-view="signup">Create your account</button></p>
+          </form>
+
+          <form class="auth-form" id="signUpForm" novalidate>
+            <div class="form-grid-2"><label>Full name<input id="signUpName" type="text" autocomplete="name" placeholder="Your full name" required></label><label>Role<select id="signUpRole"><option>SOC Analyst</option><option>Threat Hunter</option><option>Security Manager</option></select></label></div>
+            <label>Email address<input id="signUpEmail" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+            <label>Create password<div class="password-field"><input id="signUpPassword" type="password" autocomplete="new-password" placeholder="Minimum 8 characters" required><button class="password-toggle" type="button" data-password-toggle="signUpPassword" aria-label="Show password">◉</button></div></label>
+            <label>Confirm password<div class="password-field"><input id="signUpConfirm" type="password" autocomplete="new-password" placeholder="Repeat your password" required><button class="password-toggle" type="button" data-password-toggle="signUpConfirm" aria-label="Show password">◉</button></div></label>
+            <label class="checkbox-label consent"><input id="signUpConsent" type="checkbox" required><span>I understand this platform uses simulated cybersecurity data and that my account is stored securely by the server.</span></label>
+            <button class="auth-submit" type="submit">Create account and enter <span>→</span></button>
+            <p class="auth-switch">Already have an account? <button class="link-button" type="button" data-auth-view="signin">Sign in</button></p>
+          </form>
+
+
+
+          <p class="auth-disclaimer">Server-backed account access · Simulated telemetry · No real monitoring or network actions</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <header class="topbar">
+    <a class="brand" href="#overview" aria-label="Aegis Sentinel home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 34 38" fill="none"><path d="M17 2 4 7.7v9.7c0 9.1 5.9 16 13 18.6 7.1-2.6 13-9.5 13-18.6V7.7L17 2Z" stroke="currentColor" stroke-width="1.6"/><path d="m11.3 19.2 3.7 3.5 7.8-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span><b>AEGIS</b><em>SENTINEL</em></span>
+    </a>
+
+    <div class="topbar-center">
+      <span class="environment"><i></i> PRODUCTION / SIMULATED</span>
+      <span class="sync-status" id="realtimeStatus"><span class="pulse"></span> CONNECTING LIVE TELEMETRY</span>
+    </div>
+
+    <div class="topbar-actions">
+      <button class="command-button" id="openCommand" type="button" title="Open command palette">
+        <span>⌘</span> Command <kbd>Ctrl K</kbd>
+      </button>
+      <div class="clock-wrap"><span>UTC</span><strong id="utcClock">--:--:--</strong></div>
+      <div class="profile-wrap">
+        <button class="profile-button" id="profileButton" type="button" aria-label="Open account menu" aria-expanded="false">
+          <span class="avatar" id="userAvatar">AS</span><span class="profile-name" id="profileName">ANALYST</span><span class="chevron">⌄</span>
+        </button>
+        <div class="profile-menu" id="profileMenu" aria-hidden="true">
+          <div class="profile-menu-head"><span class="avatar large" id="menuAvatar">AS</span><div><strong id="menuName">Aegis Analyst</strong><span id="menuEmail">local@workspace</span></div></div>
+          <div class="profile-role" id="menuRole">SOC ANALYST · FULL TRAINING ACCESS</div>
+          <button type="button" class="profile-menu-action" id="workspaceGuide">◈ Workspace guide</button>
+          <button type="button" class="profile-menu-action danger" id="logoutButton">↪ Sign out</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-label">COMMAND CENTER</div>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">◈</span><span>Overview</span><small>LIVE</small></button>
+        <button class="nav-item" data-view="incidents"><span class="nav-icon">!</span><span>Incidents</span><b id="incidentBadge">12</b></button>
+        <button class="nav-item" data-view="detections"><span class="nav-icon">⌬</span><span>Detection Lab</span></button>
+        <button class="nav-item" data-view="intel"><span class="nav-icon">◉</span><span>Threat Intel</span></button>
+        <button class="nav-item" data-view="assets"><span class="nav-icon">▦</span><span>Asset Exposure</span></button>
+        <button class="nav-item" data-view="device"><span class="nav-icon">⌁</span><span>Device Protection</span><small>LOCAL</small></button>
+        <button class="nav-item" data-view="playbooks"><span class="nav-icon">↯</span><span>Playbooks</span></button>
+        <button class="nav-item" data-view="contact"><span class="nav-icon">⌁</span><span>Contact & LinkedIn</span></button>
+      </nav>
+
+      <div class="sidebar-label sidebar-spacer">OPERATIONS</div>
+      <div class="side-mini-card">
+        <span class="mini-ring"><span id="coveragePercent">96</span>%</span>
+        <div><strong>Detection coverage</strong><p>19 / 20 data sources healthy</p></div>
+      </div>
+      <div class="side-mini-card danger-mini">
+        <span class="tiny-red-dot"></span>
+        <div><strong id="sideCritical">3 critical cases</strong><p>Require analyst action</p></div>
+      </div>
+      <div class="sidebar-bottom">
+        <span>AEGIS v1.0.0</span>
+        <span>TRAINING BUILD</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="view active" id="overview" aria-labelledby="overviewTitle">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow"><span class="live-dot"></span> LIVE SECURITY POSTURE</p>
+            <h1 id="overviewTitle">Defend with context.<br><span>Respond with confidence.</span></h1>
+          </div>
+          <div class="heading-actions">
+            <button class="button ghost" id="exportSnapshot">⇩ Export snapshot</button>
+            <button class="button primary" id="openIncidentCreator">+ Open incident</button>
+          </div>
+        </div>
+
+        <section class="priority-banner" id="priorityBanner">
+          <div class="priority-icon">!</div>
+          <div class="priority-content"><span>PRIORITY DETECTION</span><strong>Potential credential abuse against identity infrastructure</strong><p>4 correlated signals from <code>idp-prod-02</code> · Confidence 92% · First seen 4m ago</p></div>
+          <button class="button alert" id="investigatePriority">Investigate <span>→</span></button>
+          <button class="dismiss-banner" aria-label="Dismiss priority alert" id="dismissBanner">×</button>
+        </section>
+
+        <section class="metrics-grid" aria-label="Security metrics">
+          <article class="metric-card cyan"><div class="metric-top"><span>Events processed</span><span class="trend up">↑ 18.4%</span></div><strong id="metricEvents">2.84B</strong><p><i></i> 128,492 events / sec</p></article>
+          <article class="metric-card red"><div class="metric-top"><span>Active incidents</span><span class="trend down">↑ 3 today</span></div><strong id="metricIncidents">12</strong><p><i></i> 3 need immediate action</p></article>
+          <article class="metric-card purple"><div class="metric-top"><span>Threats disrupted</span><span class="trend up">↑ 9.2%</span></div><strong id="metricThreats">48,291</strong><p><i></i> Automated containment enabled</p></article>
+          <article class="metric-card green"><div class="metric-top"><span>Protected assets</span><span class="trend flat">99.1%</span></div><strong id="metricAssets">243</strong><p><i></i> 4 endpoints in isolation</p></article>
+          <article class="metric-card orange"><div class="metric-top"><span>Exposure score</span><span class="trend up">↓ 6 pts</span></div><strong id="metricExposure">34</strong><p><i></i> Moderate organizational risk</p></article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="panel map-panel span-7">
+            <div class="panel-head"><div><span class="panel-kicker">GLOBAL OBSERVATION</span><h2>Adversary activity map</h2></div><div class="panel-actions"><button class="chip active">24H</button><button class="chip">7D</button><button class="chip">30D</button><button class="icon-button" title="Expand">⤢</button></div></div>
+            <div class="map-frame"><canvas id="threatMap" aria-label="Simulated global threat map"></canvas><div class="map-scale"><span><i class="red-swatch"></i> Critical</span><span><i class="orange-swatch"></i> High</span><span><i class="cyan-swatch"></i> Monitored</span></div><div class="map-stat"><strong id="mapAttackCount">4,821</strong><span>BLOCKED FLOWS</span></div></div>
+            <div class="map-footer"><span><i class="pulse"></i> 38 active telemetry sources</span><span>Latest correlation: <b id="latestCorrelation">Credential access chain</b></span></div>
+          </article>
+
+          <article class="panel risk-panel span-5">
+            <div class="panel-head"><div><span class="panel-kicker">AI RISK FORECAST</span><h2>Threat pressure</h2></div><button class="icon-button" title="More options">•••</button></div>
+            <div class="risk-content"><div class="risk-score"><svg viewBox="0 0 160 95" class="gauge-svg"><path class="gauge-track" d="M20 80 A60 60 0 0 1 140 80"/><path id="gaugeProgress" class="gauge-progress" d="M20 80 A60 60 0 0 1 140 80"/></svg><div><strong id="riskScore">72</strong><span>/ 100</span><small>ELEVATED</small></div></div><div class="risk-list" id="riskList"></div></div>
+            <div class="risk-foot"><span>Model confidence <b>94.6%</b></span><span>Updated <b>just now</b></span></div>
+          </article>
+
+          <article class="panel events-panel span-7">
+            <div class="panel-head"><div><span class="panel-kicker">STREAMING DETECTIONS</span><h2>Live event queue</h2></div><div class="panel-actions"><button class="filter-button" id="severityFilter">Severity: all ⌄</button><button class="icon-button" id="refreshEvents" title="Refresh events">↻</button></div></div>
+            <div class="event-table-wrap"><table class="event-table"><thead><tr><th>SEVERITY</th><th>DETECTION</th><th>ENTITY</th><th>MITRE ATT&CK</th><th>TIME</th><th></th></tr></thead><tbody id="eventTable"></tbody></table></div>
+          </article>
+
+          <article class="panel traffic-panel span-5">
+            <div class="panel-head"><div><span class="panel-kicker">NETWORK BEHAVIOUR</span><h2>Ingest &amp; anomaly telemetry</h2></div><span class="panel-status"><i></i> REAL TIME</span></div>
+            <div class="chart-wrap"><canvas id="trafficChart" aria-label="Simulated network telemetry chart"></canvas></div>
+            <div class="chart-legend"><span><i class="legend-blue"></i> Ingest</span><span><i class="legend-red"></i> Anomaly score</span><span><i class="legend-green"></i> Contained</span><b id="trafficRate">128.4K/s</b></div>
+          </article>
+
+          <article class="panel posture-panel span-4">
+            <div class="panel-head"><div><span class="panel-kicker">CONTROL POSTURE</span><h2>Security coverage</h2></div><button class="icon-button" title="View details">↗</button></div>
+            <div class="posture-ring-wrap"><div class="posture-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" class="ring-track"/><circle cx="60" cy="60" r="48" class="ring-value" id="postureCircle"/></svg><div><strong id="postureValue">86</strong><small>POSTURE</small></div></div><p>Strong defense, but identity controls require attention.</p></div>
+            <div class="control-bars" id="controlBars"></div>
+          </article>
+
+          <article class="panel mitre-panel span-4">
+            <div class="panel-head"><div><span class="panel-kicker">ATT&amp;CK COVERAGE</span><h2>Observed techniques</h2></div><button class="chip">TRENDS</button></div>
+            <div class="mitre-matrix" id="mitreMatrix"></div>
+            <div class="mitre-caption"><span><i class="matrix-hot"></i> Active</span><span><i class="matrix-warm"></i> Observed</span><span><i class="matrix-cool"></i> Covered</span></div>
+          </article>
+
+          <article class="panel endpoint-panel span-4">
+            <div class="panel-head"><div><span class="panel-kicker">ENDPOINT FLEET</span><h2>Endpoint health map</h2></div><span class="small-count" id="endpointSummary">239 / 243 healthy</span></div>
+            <div class="endpoint-grid" id="endpointGrid"></div>
+            <div class="endpoint-footer"><span><i class="green-swatch"></i> Healthy 239</span><span><i class="yellow-swatch"></i> Watch 2</span><span><i class="red-swatch"></i> Isolated 2</span></div>
+          </article>
+        </section>
+
+        <section class="lower-grid">
+          <article class="panel case-panel"><div class="panel-head"><div><span class="panel-kicker">ACTIVE CASEWORK</span><h2>Analyst queue</h2></div><button class="button compact ghost" data-view-jump="incidents">View all</button></div><div class="case-list" id="caseList"></div></article>
+          <article class="panel terminal-panel"><div class="panel-head"><div><span class="panel-kicker">AUTOMATION RUNNER</span><h2>Containment console</h2></div><span class="panel-status green"><i></i> STANDING BY</span></div><div class="terminal" id="terminal"></div><form class="terminal-input" id="terminalForm"><span>operator@aegis:~$</span><input id="terminalCommand" autocomplete="off" placeholder="type 'help' for safe simulated commands" /></form></article>
+          <article class="panel intel-panel"><div class="panel-head"><div><span class="panel-kicker">INTELLIGENCE BRIEF</span><h2>Priority intelligence</h2></div><button class="icon-button" data-view-jump="intel">↗</button></div><div id="intelBrief"></div></article>
+        </section>
+      </section>
+
+      <section class="view" id="incidents" aria-labelledby="incidentsTitle">
+        <div class="page-heading compact-heading"><div><p class="eyebrow">INCIDENT RESPONSE WORKSPACE</p><h1 id="incidentsTitle">Triage, investigate,<br><span>contain.</span></h1></div><div class="heading-actions"><button class="button ghost" id="downloadCaseReport">⇩ Case report</button><button class="button primary" id="createIncidentButton">+ New incident</button></div></div>
+        <div class="incident-layout"><article class="panel incident-list-panel"><div class="panel-head"><div><span class="panel-kicker">OPEN WORK</span><h2>Cases and detections</h2></div><div class="segmented" id="incidentTabs"><button class="active" data-tab="open">Open</button><button data-tab="assigned">Mine</button><button data-tab="closed">Closed</button></div></div><div class="incident-toolbar"><label class="search-box"><span>⌕</span><input id="incidentSearch" placeholder="Search incident, entity, technique" /></label><button class="filter-button" id="incidentSort">Priority ↓</button></div><div class="incident-list" id="incidentList"></div></article><aside class="panel incident-detail-panel" id="incidentDetail"><div class="empty-state"><div class="empty-graphic">◌</div><h2>Select an incident</h2><p>Choose an active case to review context, evidence, and recommended response actions.</p></div></aside></div>
+      </section>
+
+      <section class="view" id="detections" aria-labelledby="detectionsTitle">
+        <div class="page-heading compact-heading"><div><p class="eyebrow">DETECTION ENGINEERING</p><h1 id="detectionsTitle">Turn telemetry into<br><span>reliable detections.</span></h1></div><div class="heading-actions"><button class="button ghost" id="runDetectionTest">▷ Run test suite</button><button class="button primary" id="newRuleButton">+ New analytic</button></div></div>
+        <div class="detection-grid"><article class="panel detection-editor"><div class="panel-head"><div><span class="panel-kicker">ANALYTIC PREVIEW</span><h2>Impossible travel with privileged role</h2></div><span class="panel-status"><i></i> ENABLED</span></div><div class="editor-toolbar"><span>YAML</span><span>Version 12</span><span>Last changed 8m ago</span></div><pre class="code-editor" id="codeEditor"></pre><div class="editor-footer"><span>Data sources: Identity provider · VPN gateway · Asset inventory</span><button class="button compact primary" id="saveRule">Save version</button></div></article><article class="panel detection-quality"><div class="panel-head"><div><span class="panel-kicker">ANALYTIC QUALITY</span><h2>Performance &amp; tuning</h2></div><button class="icon-button">•••</button></div><div class="quality-stats"><div><strong>99.1%</strong><span>Precision</span></div><div><strong>2.8m</strong><span>Mean time to detect</span></div><div><strong>0.7%</strong><span>False positives</span></div></div><div class="quality-chart"><canvas id="qualityChart"></canvas></div><div class="tuning-card"><span>AI recommendation</span><strong>Suppress travel alerts where known secure corporate egress is used.</strong><button class="text-button" id="applyTuning">Apply recommended exception →</button></div></article><article class="panel sources-panel"><div class="panel-head"><div><span class="panel-kicker">DATA PIPELINES</span><h2>Detection sources</h2></div><span class="small-count">19 healthy</span></div><div class="source-list" id="sourceList"></div></article></div>
+      </section>
+
+      <section class="view" id="intel" aria-labelledby="intelTitle">
+        <div class="page-heading compact-heading"><div><p class="eyebrow">THREAT INTELLIGENCE FUSION</p><h1 id="intelTitle">Enrich every signal<br><span>with adversary context.</span></h1></div><div class="heading-actions"><button class="button ghost" id="syncIntel">↻ Sync feeds</button><button class="button primary" id="createHunt">+ Create hunt</button></div></div>
+        <div class="intel-layout"><article class="panel intel-feed-panel"><div class="panel-head"><div><span class="panel-kicker">PRIORITY FEED</span><h2>Adversary briefings</h2></div><button class="filter-button">All sources ⌄</button></div><div class="intel-feed" id="intelFeed"></div></article><article class="panel hunt-panel"><div class="panel-head"><div><span class="panel-kicker">HUNT CANVAS</span><h2>IOC pivot preview</h2></div><span class="panel-status"><i></i> READY</span></div><div class="ioc-node-view" id="iocNodeView"></div><div class="hunt-footer"><div><span>Candidate IOCs</span><strong>18</strong></div><div><span>Matched entities</span><strong>7</strong></div><button class="button compact primary" id="runHunt">Run hunt</button></div></article><article class="panel watchlist-panel"><div class="panel-head"><div><span class="panel-kicker">WATCHLIST</span><h2>Tracked indicators</h2></div><button class="icon-button">+ </button></div><div class="watchlist" id="watchlist"></div></article></div>
+      </section>
+
+      <section class="view" id="assets" aria-labelledby="assetsTitle">
+        <div class="page-heading compact-heading"><div><p class="eyebrow">ATTACK SURFACE MANAGEMENT</p><h1 id="assetsTitle">Protect what matters<br><span>before it is targeted.</span></h1></div><div class="heading-actions"><button class="button ghost" id="assetScan">↻ Refresh inventory</button><button class="button primary" id="addAsset">+ Add asset</button></div></div>
+        <div class="asset-top-grid"><article class="panel asset-score-panel"><div class="panel-head"><div><span class="panel-kicker">ORGANIZATIONAL EXPOSURE</span><h2>Attack surface score</h2></div><span class="trend up">↓ 6 pts</span></div><div class="asset-score-content"><div class="large-score"><strong>34</strong><span>/ 100</span><small>MODERATE</small></div><div class="score-copy"><strong>Exposure is improving.</strong><p>Two internet-facing services still require remediation. No critical cloud misconfigurations detected.</p><button class="text-button" id="viewRemediation">Review remediation plan →</button></div></div></article><article class="panel asset-breakdown"><div class="panel-head"><div><span class="panel-kicker">RISK BY DOMAIN</span><h2>Exposure contributors</h2></div></div><div class="domain-bars" id="domainBars"></div></article></div><article class="panel asset-table-panel"><div class="panel-head"><div><span class="panel-kicker">PRIORITIZED INVENTORY</span><h2>Critical assets</h2></div><label class="search-box compact"><span>⌕</span><input id="assetSearch" placeholder="Search assets" /></label></div><div class="asset-table-wrap"><table class="asset-table"><thead><tr><th>ASSET</th><th>OWNER</th><th>CRITICALITY</th><th>EXPOSURE</th><th>LAST SEEN</th><th>STATUS</th><th></th></tr></thead><tbody id="assetTable"></tbody></table></div></article>
+      </section>
+
+      <section class="view" id="device" aria-labelledby="deviceTitle">
+        <div class="page-heading compact-heading">
+          <div><p class="eyebrow">LOCAL WINDOWS DEFENCE CONTROLS</p><h1 id="deviceTitle">Protect your own<br><span>Windows device.</span></h1></div>
+          <div class="heading-actions"><button class="button ghost" id="deviceGuide">ⓘ Local-agent guide</button><span class="agent-status-chip" id="agentStatusChip">● AGENT OFFLINE</span></div>
+        </div>
+        <div class="device-note"><b>IMPORTANT:</b><span>This page communicates only with an optional local agent running on <code>127.0.0.1</code> on your own PC. It can check Microsoft Defender, launch a Defender scan, and block a specific IP with Windows Firewall after you authorize it. It cannot scan, control, or access another person's laptop, Google account, LinkedIn account, or network.</span></div>
+        <div class="device-grid">
+          <article class="panel device-connect-panel">
+            <div class="panel-head"><div><span class="panel-kicker">1 · CONNECT THIS PC</span><h2>Local security agent</h2></div><span class="panel-status" id="agentConnectionLabel"><i></i> NOT CONNECTED</span></div>
+            <div class="device-panel-body">
+              <p>Start <code>agent\aegis-device-agent.js</code> on this Windows computer. The agent generates a private token in <code>agent-config.json</code>. Paste it here for this browser session only.</p>
+              <label class="device-label">Local agent token<input id="agentTokenInput" type="password" autocomplete="off" placeholder="Paste token from agent-config.json"></label>
+              <div class="device-actions"><button class="button primary" id="connectAgent">Connect local agent</button><button class="button ghost" id="forgetAgent">Forget token</button></div>
+              <div class="device-guidance"><b>To enable firewall changes:</b><span>run <code>start-agent-admin.ps1</code> and approve the Windows UAC prompt.</span></div>
+            </div>
+          </article>
+          <article class="panel device-status-panel">
+            <div class="panel-head"><div><span class="panel-kicker">2 · MICROSOFT DEFENDER</span><h2>Local protection status</h2></div><button class="icon-button" id="refreshDevice" title="Refresh local status">↻</button></div>
+            <div class="device-status-body" id="deviceStatusBody"><div class="device-empty"><div>◌</div><strong>Agent not connected</strong><p>Connect your local agent to read Defender status from this PC.</p></div></div>
+          </article>
+          <article class="panel device-scan-panel">
+            <div class="panel-head"><div><span class="panel-kicker">3 · ON-DEMAND SCAN</span><h2>Scan this PC</h2></div><span class="panel-status green"><i></i> MICROSOFT DEFENDER</span></div>
+            <div class="device-panel-body">
+              <p>These buttons ask your local agent to launch Windows Defender on this computer. Scan results remain in Windows Security.</p>
+              <div class="scan-buttons"><button class="button primary" id="quickScan">▶ Quick scan</button><button class="button ghost" id="fullScan">▷ Full scan</button></div>
+              <div class="device-guidance"><b>Quick scan:</b><span>checks common malware locations. <b>Full scan:</b> may take a long time depending on your disk size.</span></div>
+            </div>
+          </article>
+          <article class="panel device-firewall-panel">
+            <div class="panel-head"><div><span class="panel-kicker">4 · FIREWALL CONTROL</span><h2>Block a confirmed malicious IP</h2></div><span class="panel-status" id="firewallLabel"><i></i> ADMIN REQUIRED</span></div>
+            <div class="device-panel-body">
+              <p>Only block an IP you have confirmed from your own Defender alert, router log, or authorized investigation. This creates Aegis-named inbound and outbound Windows Firewall rules.</p>
+              <div class="ip-control"><input id="blockIpInput" autocomplete="off" inputmode="decimal" placeholder="Example: 198.51.100.42"><button class="button alert" id="blockIp">Block IP</button></div>
+              <div class="block-list" id="blockList"><p>No local firewall rules loaded.</p></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="playbooks" aria-labelledby="playbooksTitle">
+        <div class="page-heading compact-heading"><div><p class="eyebrow">AUTOMATED RESPONSE</p><h1 id="playbooksTitle">Respond consistently.<br><span>Contain decisively.</span></h1></div><div class="heading-actions"><button class="button ghost" id="testPlaybook">▷ Test safely</button><button class="button primary" id="newPlaybook">+ New playbook</button></div></div>
+        <div class="playbook-layout"><article class="panel playbook-gallery"><div class="panel-head"><div><span class="panel-kicker">RESPONSE LIBRARY</span><h2>Active playbooks</h2></div><span class="small-count">8 enabled</span></div><div class="playbook-cards" id="playbookCards"></div></article><article class="panel flow-panel"><div class="panel-head"><div><span class="panel-kicker">RUNBOOK VISUALIZER</span><h2 id="flowTitle">Credential abuse containment</h2></div><span class="panel-status"><i></i> READY</span></div><div class="flow-canvas" id="flowCanvas"></div><div class="flow-footer"><div><span>Median execution</span><strong>42 sec</strong></div><div><span>Success rate</span><strong>99.4%</strong></div><button class="button compact alert" id="simulatePlaybook">Simulate run</button></div></article></div>
+      </section>
+
+      <section class="view" id="contact" aria-labelledby="contactTitle">
+        <div class="page-heading compact-heading">
+          <div><p class="eyebrow">CONNECT WITH THE BUILDER</p><h1 id="contactTitle">Questions, feedback,<br><span>or collaboration.</span></h1></div>
+          <div class="heading-actions"><a class="button primary" id="linkedinButton" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">in Open LinkedIn</a></div>
+        </div>
+        <div class="contact-layout">
+          <article class="panel contact-details-panel">
+            <div class="panel-head"><div><span class="panel-kicker">PROJECT CONTACT</span><h2 id="contactOwner">Project owner</h2></div><span class="panel-status green"><i></i> AVAILABLE</span></div>
+            <div class="contact-details">
+              <p>This is a live, browser-based Aegis Sentinel project. Send a message from the form, or use LinkedIn to connect directly.</p>
+              <a class="contact-link" id="contactEmailLink" href="mailto:owner@example.com"><span>✉</span><div><small>EMAIL</small><strong id="contactEmailText">owner@example.com</strong></div></a>
+              <a class="contact-link" id="contactPhonePrimaryLink" href="tel:+94729412345"><span>☎</span><div><small>PHONE</small><strong id="contactPhonePrimaryText">+94 729412345</strong></div></a>
+              <a class="contact-link" id="contactPhoneSecondaryLink" href="tel:+94721509250"><span>☎</span><div><small>ALTERNATE PHONE</small><strong id="contactPhoneSecondaryText">+94 721509250</strong></div></a>
+              <a class="contact-link" id="contactLinkedinLink" href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"><span>in</span><div><small>LINKEDIN</small><strong id="contactLinkedinText">Open professional profile</strong></div></a>
+              <div class="contact-safety"><b>CONTACT DELIVERY</b><span id="contactDeliveryStatus">Messages are saved in the project database. Configure Gmail in .env to receive a copy in the owner's inbox.</span></div>
+            </div>
+          </article>
+          <article class="panel contact-form-panel">
+            <div class="panel-head"><div><span class="panel-kicker">SEND A MESSAGE</span><h2>Contact the project owner</h2></div></div>
+            <form id="contactForm" class="contact-form">
+              <div class="form-grid-2"><label>Your name<input id="contactName" maxlength="80" placeholder="Your name" required></label><label>Your email<input id="contactEmail" type="email" maxlength="160" placeholder="you@example.com" required></label></div>
+              <label>Subject<input id="contactSubject" maxlength="140" placeholder="How can we help?" required></label>
+              <label>Message<textarea id="contactMessage" maxlength="2000" placeholder="Write your message here..." required></textarea></label>
+              <button class="button primary" type="submit" id="contactSubmit">Send message securely →</button>
+              <p class="contact-form-note" id="contactFormNote">Messages are stored in the project database. When Gmail is configured, a copy is delivered to the owner inbox.</p>
+            </form>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-layer" id="modalLayer" aria-hidden="true">
+    <div class="modal" id="modal"><button class="modal-close" id="closeModal" aria-label="Close">×</button><div id="modalContent"></div></div>
+  </div>
+
+  <div class="command-modal" id="commandModal" aria-hidden="true"><div class="command-box"><div class="command-input"><span>⌕</span><input id="commandSearch" placeholder="Search actions, pages, cases…" autocomplete="off" /></div><div class="command-results" id="commandResults"></div><div class="command-foot"><span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span></div></div></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

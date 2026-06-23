@@ -1,0 +1,14 @@
+{
+  "name": "aegis-sentinel-realtime-no-npm",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Dependency-free real-time SOC portfolio platform with secure accounts and simulated telemetry.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}
