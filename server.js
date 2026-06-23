@@ -295,7 +295,7 @@ function serveStatic(req, res, pathname) {
   fs.stat(absolute, (err, stat) => {
     if (err || !stat.isFile()) { json(res, 404, { error:'Not found' }); return; }
     const ext = path.extname(absolute).toLowerCase();
-    res.writeHead(200, { 'Content-Type':mime[ext] || 'application/octet-stream', 'Cache-Control': ext === '.html' ? 'no-cache' : 'public, max-age=3600' });
+    res.writeHead(200, { 'Content-Type':mime[ext] || 'application/octet-stream', 'Cache-Control':'no-store, max-age=0' });
     if (req.method === 'HEAD') return res.end();
     fs.createReadStream(absolute).pipe(res);
   });

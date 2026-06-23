@@ -715,3 +715,15 @@ function drawThreatMap() {
 }
 function drawTrafficChart() { const canvas=$('#trafficChart'); if(!canvas)return; const ctx=canvas.getContext('2d');const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;ctx.clearRect(0,0,w,h);ctx.strokeStyle='rgba(71,155,191,.12)';ctx.lineWidth=.6;for(let i=1;i<5;i++){const y=(h/5)*i;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();} const draw=(data,color,fill,max)=>{ const step=w/(data.length-1);ctx.beginPath();data.forEach((v,i)=>{const x=i*step,y=h-((v/max)*(h-16))-8;i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.beginPath();data.forEach((v,i)=>{const x=i*step,y=h-((v/max)*(h-16))-8;i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.strokeStyle=color;ctx.lineWidth=1.4;ctx.stroke();};draw(APP.traffic.ingest,'#25d4ff','rgba(37,212,255,.055)',160);draw(APP.traffic.anomaly,'#ff5470','rgba(255,84,112,.05)',160);draw(APP.traffic.contained,'#4df2aa','rgba(77,242,170,.045)',160);ctx.font='8px DM Mono';ctx.fillStyle='rgba(138,183,203,.6)';ctx.fillText('160K',4,13);ctx.fillText('80K',4,h/2);ctx.fillText('0',4,h-6); }
 function drawQualityChart() { const canvas=$('#qualityChart'); if(!canvas)return;const ctx=canvas.getContext('2d');const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;ctx.clearRect(0,0,w,h);ctx.strokeStyle='rgba(71,155,191,.12)';ctx.lineWidth=.6;for(let i=1;i<4;i++){ctx.beginPath();ctx.moveTo(0,(h/4)*i);ctx.lineTo(w,(h/4)*i);ctx.stroke();} const points=Array.from({length:18},(_,i)=>62+Math.sin(i*.85)*8+i*1.45);const step=w/(points.length-1);ctx.beginPath();points.forEach((v,i)=>{const x=i*step,y=h-(v/100)*(h-18)-8;i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.strokeStyle='#b68cff';ctx.lineWidth=1.5;ctx.stroke();ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();ctx.fillStyle='rgba(182,140,255,.09)';ctx.fill();ctx.fillStyle='rgba(148,190,208,.7)';ctx.font='8px DM Mono';ctx.fillText('Precision trend',8,13); }
+
+/* Reliable navigation fallback for browsers with cached or delayed listeners. */
+document.addEventListener('click', (event) => {
+  const button = event.target.closest('.nav-item, [data-view-jump]');
+  if (!button) return;
+
+  const view = button.dataset.view || button.dataset.viewJump;
+  if (!view || !document.getElementById(view)) return;
+
+  event.preventDefault();
+  changeView(view);
+}, true);
